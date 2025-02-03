@@ -35,7 +35,7 @@ def _get_filepath_safely(url: str, directory: str or Path = ".") -> Path:
     """ Convert to a path string, which is composed of `directory` and the basename part of `url`;
         e.g., https://example.com/a/b/foo.xlsx => rawfiles/foo.xlsx.
         Additionally, the basename part is checked for security (to avoid directory traversal)
-        by forcing it to consist alphanumerics, '.', '_', and '-' only; if not, ValueException is raised.
+        by forcing it to be composed of alphanumerics, '.', '_', and '-' only; if not, ValueException is raised.
     """
     if isinstance(directory, str):
         to_dir = Path(directory)

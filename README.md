@@ -1,6 +1,6 @@
 # ja_meti
 
-Convert indices of Research Reports (in Japanese) to a CSV.  The reports are written by consignee companies/organizations, and published by METI, a ministry in Japan gov.
+Convert indices of Research Reports (in Japanese) to a CSV.  The reports are written by consignee companies/organizations, and published by METI, a ministry in Japan gov, at https://www.meti.go.jp/topic/data/e90622aj.html.
 
 	
 ## Downloading indices to a CSV file
@@ -19,7 +19,9 @@ I think it's not compatible with FY2018 and before, because Gengo year format is
 	
 ## CSV format
 
-The first row is headers. You can easily read it by `pandas.read_csv()`.
+You can easily read the CSV file by `pandas.read_csv()`.
+Note that the first row is for column names.
+The columns "title", "consignee", and "consignor" mostly consist of Japanese characters encoded in UTF-8.	
 
 Columns are:
 | Column     | Original column | Sample | Note |
