@@ -7,10 +7,10 @@ import pandas as pd
 from janome.tokenizer import Tokenizer
 
 
-FONT_PATH="/mnt/c/Windows/Fonts/YuGothM.ttc",
 FONT_PATH="/usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf"
 
 INFILE="resrep_FY2019-2023.csv"
+DATA="consignee"  # or "consignor", "consignor.1st", "title"
 
 df = pd.read_csv(INFILE, encoding="utf-8")
 print(df.columns)
@@ -36,8 +36,7 @@ def ja_words(texts):
                 words.append(tokinfo[0])
     return words
 
-data = "consignee"
-data = "title"
+data = DATA
 
 if data == "consignee":
     words = [x for x in df.consignee]
