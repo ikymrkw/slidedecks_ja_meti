@@ -47,6 +47,8 @@ elif data == "consignor.1st":
     words = [x.split(":")[0] for x in words]
 elif data == "title":
     words = ja_words([x for x in df.title])
+    excludes = "令和 年度 経済 産業 事業".split(" ")
+    words = [w for w in words if w not in excludes]
 
 freqs = to_frequencies(words)
 
