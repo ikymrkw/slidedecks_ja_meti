@@ -8,19 +8,19 @@ Convert indices of Research Reports (in Japanese) to a CSV.  The reports are wri
 python mklist_resrep.py
 ```
 
-This will download Excel files from the Web,
-and save the indices to a single file `resrep.csv`.
+This will download Excel files from the website,
+and sort them out to a single index, and save it to the file `resrep.csv`.
 A sample output is in [resrep_FY2019-2023.csv](resrep_FY2019-2023.csv), containing 2,788 entries.
 
-Note that the current script only reads indices during FY2019-FY2023.
+Note that the current script only reads Excel-format indices during FY2019-FY2023.
 If you want to read those from FY2024 and later, you need to make small changes to the script.
-I think it's not compatible with FY2018 and before, because Gengo (元号) year format is only considered for Reiwa (令和; on and after 2019).
+The script is not compatible with FY2018 and before, because it only supports Reiwa (令和; on and after 2019) as Gengo (元号) year format.
 
 	
 ## CSV format
 
 You can easily read the CSV file by `pandas.read_csv()`.
-Note that the first row is for column names.
+Note that the first line is for column names.
 The columns `title`, `consignee`, and `consignor` mostly consist of Japanese characters encoded in UTF-8.	
 
 Columns are:
@@ -39,7 +39,7 @@ Columns are:
 - *1: For `id`, the fiscal year (`FY####_`) is prepended. Optionally, suffix number (like `_1`) is appended when the (original) number is duplicated. ("Cont'd" rows are not regarded as duplicated; see *4 below.)
 - *2: For `released_on`, the years are in western style (like `2024mmdd`), converted from the original Japanese Gengo style year format.
 - *3: For `consignor`, any newline character `\n` in the string is converted to `::`. This can be used as a separator for organizational hierarchy (though it is not guaranteed to be so in all the cases).
-- *4: For `document_url` and `data_url`, these columns may contain **a comma-separated list of URLs**, having multiple URLs in rare occasions. This is because, in original Excel index, there are rows with title "（続き）" (which means "(Cont'd)"), each of which gives an additional URL for its preceding row. Multiple "Cont'd" rows for one entry are possible. The script compresses these multiple rows by appending additional URL(s) in comma-separated list format.
+- *4: For `document_url` and `data_url`, a cell in these columns may contain **a comma-separated list of URLs**, having multiple URLs in rare occasions. This is because, in original Excel index, there are lines with title "（続き）" (which means "(Cont'd)"), each of which gives an additional URL for its preceding line. Multiple "Cont'd" lines for one entry are possible. The script compresses these multiple lines into a single row (or entry) by appending additional URL(s) in comma-separated list format.
 
 	
 ## Word cloud
