@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     dept = "産業保安グループ"
     df2 = by_consignor_dept(df, dept)
-    print(f"{len(df2)}: consignee startswith {dept}")
+    print(f"{len(df2)}: consignor startswith {dept}")
     print(" Top 5 consignees")
     ser = top_consignees(df2)[:5]
     print(np.array(list(zip(ser.values, ser.index.array))))
