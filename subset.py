@@ -31,7 +31,8 @@ if __name__ == "__main__":
 
     dept = "資源エネルギー庁"
     df2 = by_consignor_dept(df, dept)
-    print(f"{len(df2)}: consignee startswith {dept}")
+    print(f"{len(df2)}: consignor startswith {dept}")
+    print(" Top 5 consignees")
     ser = top_consignees(df2)[:5]
     print(np.array(list(zip(ser.values, ser.index.array))))
 
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     dept = "産業保安グループ"
     df2 = by_consignor_dept(df, dept)
     print(f"{len(df2)}: consignee startswith {dept}")
+    print(" Top 5 consignees")
     ser = top_consignees(df2)[:5]
     print(np.array(list(zip(ser.values, ser.index.array))))
 
@@ -48,6 +50,7 @@ if __name__ == "__main__":
     consignor = "商務情報政策局::サイバーセキュリティ課"
     df2 = by_consignor(df, consignor)
     print(f"{len(df2)}: {consignor=}")
+    print(" Top 5 consignees")
     ser = top_consignees(df2)[:5]
     print(np.array(list(zip(ser.values, ser.index.array))))
 
@@ -55,6 +58,7 @@ if __name__ == "__main__":
     keyword = "原子力"
     df2 = by_title_keyword(df, keyword)
     print(f"{len(df2)}: {keyword} in title")
+    print(" Top 5 consignees")
     ser = top_consignees(df2)[:5]
     print(np.array(list(zip(ser.values, ser.index.array))))
     ser = df2["consignor"].value_counts()
@@ -66,6 +70,7 @@ if __name__ == "__main__":
     df2 = by_title_keyword(df, keyword)
     print(f"{len(df2)}: {keyword} in title")
     ser = top_consignees(df2)[:5]
+    print(" Top 5 consignees")
     print(np.array(list(zip(ser.values, ser.index.array))))
     ser = df2["consignor"].value_counts()
     print(" consignors:")
