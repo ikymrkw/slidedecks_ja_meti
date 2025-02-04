@@ -1,3 +1,5 @@
+from downloader import Downloader
+
 import os
 from pathlib import Path
 import re
@@ -21,14 +23,20 @@ user_agent = "Mozilla/5.0"
 # user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"  # long version
 
 
+HTTP_WAIT_SEC = 5
+WAIT_MESSAGE = "Waiting for HTTP cooldown..."
+
+
+downloader = Downloader(HTTP_WAIT_SEC, WAIT_MESSAGE, user_agent=user_agent)
+
+
 def _download(url: str, filepath: Path) -> Path:
-    assert str is not None
+    assert url is not None
     assert filepath is not None
     print(f"Downloading from {url} to {filepath}...")
-    with requests.get(url, stream=True, headers={"User-Agent": user_agent}) as r:
-        with open(filepath, "wb") as f:
-            shutil.copyfileobj(r.raw, f)
-    return filepath
+    f = downloader.download(url, filepath)
+    print("Done")
+    return f
 
 
 def _get_filepath_safely(url: str, directory: str or Path = ".") -> Path:
@@ -167,6 +175,8 @@ for fy in (2019, 2020, 2021, 2022, 2023):
 
     # concatenate
     df_all = pd.concat([df_all, df], axis=0)
+
+downloader.close()
 
 cleanse(df_all)
 
