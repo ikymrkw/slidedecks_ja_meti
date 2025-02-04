@@ -61,3 +61,13 @@ if __name__ == "__main__":
     print(" consignors:")
     print(np.array(list(zip(ser.values, ser.index.array))))
 
+    print()
+    keyword = "放射性廃棄物"
+    df2 = by_title_keyword(df, keyword)
+    print(f"{len(df2)}: {keyword} in title")
+    ser = top_consignees(df2)[:5]
+    print(np.array(list(zip(ser.values, ser.index.array))))
+    ser = df2["consignor"].value_counts()
+    print(" consignors:")
+    print(np.array(list(zip(ser.values, ser.index.array))))
+
